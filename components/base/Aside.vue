@@ -90,7 +90,7 @@
             </div>
           </li>
           <li class="nav-item mt-3">
-            <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
+            <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Administracion</h6>
           </li>
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link " aria-controls="pagesExamples"
@@ -116,7 +116,7 @@
                   </g>
                 </svg>
               </div>
-              <span class="nav-link-text ms-1">Pages</span>
+              <span class="nav-link-text ms-1">Configuracion</span>
             </a>
             <div class="collapse " id="pagesExamples">
               <ul class="nav ms-4 ps-3">

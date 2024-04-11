@@ -27,10 +27,10 @@
                   </svg>
                 </a>
               </li>
-              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Analytics</li>
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:void(0);">{{page}}</a></li>
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{modulo}}</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Analytics</h6>
+            <h6 class="font-weight-bolder mb-0">{{modulo}}</h6>
           </nav>
           <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
             <a href="javascript:;" class="nav-link text-body p-0">
@@ -155,3 +155,17 @@
         </div>
       </nav>
 </template>
+<script>
+  export default{
+    props:{
+      page:{
+          type:String,
+          default:''
+      },
+      modulo:{
+          type:String,
+          default:''
+      }
+    }
+  }
+</script>
