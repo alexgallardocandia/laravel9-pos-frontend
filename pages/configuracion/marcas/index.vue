@@ -8,6 +8,19 @@
             <nuxtLink :to="url_nuevo" class="btn btn-dark btn-sm w-100">
               <i class="fas fa-plus"></i> Agregar
             </nuxtLink>
+            <div class="col-lg-12">
+                <button
+                  class="btn bg-gradient-primary mb-0 mt-lg-auto w-100"
+                  type="button"
+                  name="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#AjusteModal"
+                >
+                  <i class="fas fa-cog"></i>
+                  Ajustar Stock
+                </button>
+                
+              </div>
           </div>
           <div class="col-12">
             <div class="card">
@@ -37,6 +50,7 @@
                 </table>
               </div>
             </div>
+            <ModalsModal></ModalsModal>
           </div>
         </div>
       </div>
@@ -45,75 +59,75 @@
 </template>
 
 <script>
-export default {
-  name: 'demo',
-  head() {
-    return {
-      title: this.modulo
-    }
-  },
-  data() {
-    return{
-      load:true,
-      list:[],
-      apiUrl:'marcas',
-      page:'Configuracion',
-      modulo:'Marcas',
-      url_nuevo:'/configuracion/marcas/nuevo',
-      url_editar:'/configuracion/marcas/editar/',
-
-    }
-  },
-  methods:{
-    async GET_DATA(path) {
-      const res = await this.$api.$get(path)
-      return res
-    },
-    async EliminarItem(id){
-      this.load=true
-      try {
-        const res = await this.$api.$delete(this.apiUrl+'/'+id)
-        console.log(res)
-        await Promise.all([this.GET_DATA(this.apiUrl)]).then((v)=>{
-          this.list = v[0]
-        })
-      } catch (e) {
-        console.log(e);
-      } finally{
-        this.load = false
+  export default {
+    name: 'demo',
+    head() {
+      return {
+        title: this.modulo
       }
-      
     },
-    Eliminar(id) {
-      let self = this
-      this.$swal.fire({
-        title: "Deseas Eliminar?",
-        showDenyButton: false,
-        showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelarButtonText: "Cancelar"
-      }).then( async (result) => {
+    data() {
+      return{
+        showModal: false,
+        load:true,
+        list:[],
+        apiUrl:'marcas',
+        page:'Configuracion',
+        modulo:'Marcas',
+        url_nuevo:'/configuracion/marcas/nuevo',
+        url_editar:'/configuracion/marcas/editar/',
 
-        if (result.isConfirmed) {
-          await self.EliminarItem(id)
+      }
+    },
+    methods:{
+      async GET_DATA(path) {
+        const res = await this.$api.$get(path)
+        return res
+      },
+      async EliminarItem(id){
+        this.load=true
+        try {
+          const res = await this.$api.$delete(this.apiUrl+'/'+id)
+          console.log(res)
+          await Promise.all([this.GET_DATA(this.apiUrl)]).then((v)=>{
+            this.list = v[0]
+          })
+        } catch (e) {
+          console.log(e);
+        } finally{
+          this.load = false
         }
-      });
-    }
+        
+      },
+      Eliminar(id) {
+        let self = this
+        this.$swal.fire({
+          title: "Deseas Eliminar?",
+          showDenyButton: false,
+          showCancelButton: true,
+          confirmButtonText: "Eliminar",
+          cancelarButtonText: "Cancelar"
+        }).then( async (result) => {
 
-  },
-  mounted(){
-    this.$nextTick(async() =>{
-      try {
-        await Promise.all([this.GET_DATA(this.apiUrl)]).then((v)=>{
-          this.list = v[0]
-        })
-      } catch (e) {
-        console.log(e);
-      } finally{
-        this.load = false
+          if (result.isConfirmed) {
+            await self.EliminarItem(id)
+          }
+        });
       }
-    })
-  },
 
-}
+    },
+    mounted(){
+      this.$nextTick(async() =>{
+        try {
+          await Promise.all([this.GET_DATA(this.apiUrl)]).then((v)=>{
+            this.list = v[0]
+          })
+        } catch (e) {
+          console.log(e);
+        } finally{
+          this.load = false
+        }
+      })
+    },
+  }
 </script>

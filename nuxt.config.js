@@ -36,7 +36,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/api'
+    '~/plugins/api',
+    // '~/node_modules/vue-js-modal/dist/vue-js-modal.esm.js' 
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

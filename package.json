@@ -13,6 +13,7 @@
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
+    "vue-js-modal": "^2.0.1",
     "vue-loading-overlay": "3.0",
     "vue-server-renderer": "^2.7.10",
     "vue-sweetalert2": "^5.0.5",

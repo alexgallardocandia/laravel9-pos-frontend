@@ -1,25 +1,29 @@
 <template>
-    <div>
-        <Loader :load="load"></Loader>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"></div>
+            <Loader :load="load"></Loader>
 
-        <div class="row">
-            <div class="col-12">
-                <slot name="body">
-                  
-                </slot>
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-6">
-                        <button class="btn btn-dark w-100" @click="Save()"> Guardar</button>
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-info w-100" @click="$router.back()"> Regresar</button>
+            <div class="row">
+                <div class="col-12">
+                    <slot name="body">
+                    
+                    </slot>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-dark w-100" @click="Save()"> Guardar</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-info w-100" @click="$router.back()"> Regresar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
+    
   </template>
   
   <script>
