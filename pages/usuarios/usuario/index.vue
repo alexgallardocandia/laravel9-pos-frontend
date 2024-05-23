@@ -5,7 +5,9 @@
       <div slot="body">
         <div class="row justify-content-end">
           <div class="col-2">
-            
+            <nuxtLink :to="url_nuevo" class="btn btn-dark btn-sm w-100">
+              <i class="fas fa-plus"></i> Agregar
+            </nuxtLink>
           </div>
           <div class="col-12">
             <div class="card">
@@ -13,32 +15,23 @@
                 <table class="table">
                   <thead>
                     <th class="py-0 px-1">#</th>
-                    <th class="py-0 px-1">Nombre</th>
-                    <th class="py-0 px-1">CodeBar</th>
-                    <th class="py-0 px-1">Marca</th>
-                    <th class="py-0 px-1">Categoria</th>
-                    <th class="py-0 px-1">Stock</th>
-                    <th class="py-0 px-1">Inversion</th>
-                    <th class="py-0 px-1">Valorizado</th>
-                    <th class="py-0 px-1">Ganancia</th>
+                    <th class="py-0 px-1">Usuario</th>
+                    <th class="py-0 px-1">Email</th>
                     <th class="py-0 px-1"></th>
                   </thead>
                   <tbody>
                     <tr v-for="(m,i) in list" >
                       <td class="py-0 px-1">{{ i+1 }}</td>
-                      <td class="py-0 px-1">{{ m.nombre }}</td>
-                      <td class="py-0 px-1">{{ m.barra }}</td>
-                      <td class="py-0 px-1">{{ m.marca.nombre }}</td>
-                      <td class="py-0 px-1">{{ m.categoria.nombre }}</td>
-                      <td class="py-0 px-1"> <span class="badge " :class="[m.stock <= m.stock_minimo?'badge-danger':'badge-success']">{{ m.stock }} {{ m.medida.codigo }}</span></td>
-                      <td class="py-0 px-1">{{ Number(m.inversion).toFixed(2) }}</td>
-                      <td class="py-0 px-1">{{ Number(m.valorizado).toFixed(2)}}</td>
-                      <td class="py-0 px-1">{{ Number(m.ganancia).toFixed(2)}}</td>
+                      <td class="py-0 px-1">{{ m.name }}</td>
+                      <td class="py-0 px-1">{{ m.email }}</td>
                       <td class="py-0 px-1">
                         <div class="btn-group">
                           <nuxtLink :to="url_editar+m.id" class="btn btn-info btn-sm py-1 px-2">
-                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-pen"></i>
                           </nuxtLink>
+                          <button type="button" @click="Eliminar(m.id)" class="btn btn-danger btn-sm py-1 px-2">
+                            <i class="fas fa-trash"></i>
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -64,10 +57,11 @@ export default {
     return{
       load:true,
       list:[],
-      apiUrl:'inventario',
-      page:'Inventario',
-      modulo:'General',
-      url_editar:'/inventario/kardex/',
+      apiUrl:'users',
+      page:'Usuarios',
+      modulo:'Usuario',
+      url_nuevo:'/usuarios/usuario/nuevo',
+      url_editar:'/usuarios/usuario/editar/',
 
     }
   },

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <JcLoader :load="load"></JcLoader>
+      <Loader :load="load"></Loader>
       <AdminTemplate :page="page" :modulo="modulo">
         <div slot="body">
           <div class="row">
@@ -47,26 +47,26 @@
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Ganancia Unitaria</h6>
-                          <h5>0</h5>
+                          <h5>{{ Number(model.venta - model.compra).toFixed(2) }}</h5>
                         </div>
                       </div>
-                      <span class="badge"
-                        ><i class="fas fa-archive" aria-hidden="true"></i> 0 en
+                      <span class="badge " :class="[model.stock <= model.stock_minimo?'badge-danger':'badge-success']"
+                        ><i class="fas fa-archive" aria-hidden="true"></i> {{ model.stock }} en
                         Stock</span
                       >
                       <br />
                       <div class="d-flex justify-content-between">
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Inversion</h6>
-                          <h5>0</h5>
+                          <h5>{{ Number(model.inversion).toFixed(2)}}</h5>
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Valorizado</h6>
-                          <h5>0</h5>
+                          <h5>{{ Number(model.valorizado).toFixed(2)}}</h5>
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Ganancia</h6>
-                          <h5>0</h5>
+                          <h5>{{ Number(model.ganancia).toFixed(2)}}</h5>
                         </div>
                       </div>
                       <div class="row mt-4">
@@ -116,6 +116,7 @@
                                           type="text"
                                           placeholder=""
                                           class="form-control"
+                                          v-model.number="inventario.cantidad"
                                         />
                                       </div>
                                     </div>
@@ -126,6 +127,7 @@
                                           name=""
                                           id=""
                                           class="form-control"
+                                          v-model.number="inventario.tipo"
                                         >
                                           <option value="1">ENTRADA</option>
                                           <option value="2">SALIDA</option>
@@ -139,6 +141,7 @@
                                           type="text"
                                           placeholder=""
                                           class="form-control"
+                                          v-model.number="model.compra"
                                         />
                                       </div>
                                     </div>
@@ -149,6 +152,7 @@
                                           type="text"
                                           placeholder=""
                                           class="form-control"
+                                          v-model.number="model.venta"
                                         />
                                       </div>
                                     </div>
@@ -159,6 +163,7 @@
                                           type="text"
                                           placeholder=""
                                           class="form-control"
+                                          v-model="inventario.motivo"
                                         />
                                       </div>
                                     </div>
@@ -219,26 +224,26 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
+                            <tr v-for="m in model.inventario">
                               <td>
                                 <div class="d-flex px-1 py-1">
-                                  <div class="text-xxs">--</div>
+                                  <div class="text-xxs">{{ m.motivo }}</div>
                                   <div
                                     class="d-flex flex-column justify-content-center"
                                   >
-                                    <h6 class="mb-0 text-xxs">, -</h6>
+                                    <!-- <h6 class="mb-0 text-xxs">, -</h6> -->
                                   </div>
                                 </div>
                               </td>
                               <td>
-                                <h6><span class="badge text-xxs">--</span></h6>
+                                <h6><span class="badge text-xxs" :class="[m.tipo == 2?'badge-danger':'badge-success']">{{ m.cantidad }} {{ model.medida.codigo }}</span></h6>
                               </td>
-                              <td class="text-xxs">0</td>
-                              <td class="align-middle text-sm text-xxs">0</td>
+                              <td class="text-xxs">{{ Number(m.compra).toFixed(2) }}</td>
+                              <td class="align-middle text-sm text-xxs">{{ Number(m.venta).toFixed(2) }}</td>
                               <td class="align-middle text-center text-xxs">
                                 <a
                                   href="javascript:void(0);"
-                                  @click="DeleteItem(0)"
+                                  @click="DeleteItem(m.id)"
                                   data-bs-toggle="tooltip"
                                   data-bs-original-title="Delete product"
                                 >
@@ -273,6 +278,12 @@
   
     data() {
       return {
+        load: true,
+        list: [],
+        apiUrl: "inventario",
+        page: "Inventario",
+        modulo: "General",
+        url_editar: "/inventario/kardex/",
         model:{
             nombre:'',
             barra:'',
@@ -282,14 +293,23 @@
             marca_id:'',
             medida_id:'',
             categoria_id:'',
+            marca:{
+              nombre:'',
+            },
+            categoria:{
+              nombre:'',
+            },
+            medida:{
+              nombre:'',
+              codigo:'',
+            },
+            inventario:[],
         },
-        load: true,
-        list: [],
-        apiUrl: "inventario",
-        page: "Inventario",
-        modulo: "General",
-  
-        url_editar: "/inventario/kardex/",
+        inventario:{
+          tipo:1,
+          cantidad:1,
+          motivo:''
+        }
       };
     },
     methods: {
@@ -297,13 +317,39 @@
         const res = await this.$api.$get(path);
         return res;
       },
+      async Save() {
+        this.load = true
+        self = this
+        try {
+          this.inventario.articulo_id = this.model.id
+          this.inventario.compra = this.model.compra
+          this.inventario.venta = this.model.venta
+          const res = await this.$api.$post(this.apiUrl, this.inventario)
+          console.log(res)
+          this.$swal.fire({
+              title: "Movimiento Guardado!",
+              showDenyButton: false,
+              showCancelButton: false,
+          }).then( async (result) => {
+              if (result.isConfirmed) {
+                await Promise.all([self.GET_DATA(this.apiUrl+"/kardex/"+ this.$route.params.id)]).then((v) => {
+                  self.model = v[0];
+                });
+              }
+          });
+        } catch (e) {
+          console.log(e)
+        }finally{
+          this.load = false
+        }
+      },
       async EliminarItem(id) {
         this.load = true;
         try {
           const res = await this.$api.$delete(this.apiUrl + "/" + id);
           console.log(res);
-          await Promise.all([this.GET_DATA(this.apiUrl)]).then((v) => {
-            this.list = v[0];
+          await Promise.all([this.GET_DATA(this.apiUrl+"/kardex/"+ this.$route.params.id)]).then((v) => {
+            this.model = v[0];
           });
         } catch (e) {
           console.log(e);
@@ -311,11 +357,11 @@
           this.load = false;
         }
       },
-      Eliminar(id) {
+      DeleteItem(id) {
         let self = this;
         this.$swal
           .fire({
-            title: "Deseas Eliminar?",
+            title: "Deseas Eliminar el movimiento?",
             showDenyButton: false,
             showCancelButton: true,
             confirmButtonText: "Eliminar",
