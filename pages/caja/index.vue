@@ -1,6 +1,6 @@
 <template>
     <div>
-      <JcLoader :load="load"></JcLoader>
+      <Loader :load="load"></Loader>
       <AdminTemplate :page="page" :modulo="modulo">
         <div slot="body">
           <div class="row justify-content-end">
@@ -521,27 +521,48 @@
       },
       async AddMovimiento() {
         this.modalMovimiento = false
-        this.movimiento.caja_id = this.user.caja.id
+        this.movimiento.caja_id = this.user.caja_id
         await this.$api.$post('cajamovimientos',this.movimiento);
-        await Promise.all([this.GET_DATA('cajas/'+this.user.caja.id)]).then((v)=>{
+        await Promise.all([this.GET_DATA('cajas/'+this.user.caja_id)]).then((v)=>{
           this.caja = v[0]
         })
+        this.clearInputs()
       },
       async Save() {
-        let id = this.caja.id
-        let res = await this.$api.$put('cajas/'+id,{id:id});
-        let user = this.user
-        user.caja_id = res.id
-        localStorage.setItem('userAuth', JSON.stringify(user))
+        this.load=true
+        try {
+          let id = this.caja.id
+          let res = await this.$api.$put('cajas/'+id,{id:id});
+          let user = this.user
+          user.caja_id = res.id
+          localStorage.setItem('userAuth', JSON.stringify(user))
+          this.user=user
+          console.log(this.user);
+          await Promise.all([this.GET_DATA('cajas/'+this.user.caja_id)]).then((v)=>{
+            this.caja=v[0]
+          })
+        } catch (e) {
+          console.log(e);
+        } finally {
+          this.load = false
+        }
+      },
+      clearInputs()
+      {
+        this.movimiento.monto = 0
+        this.movimiento.motivo = ''
+        this.movimiento.tipo = 1
       }
     },
     mounted() {
       let user = localStorage.getItem('userAuth')
       this.user= JSON.parse(user)
       this.$nextTick(async ()=>{
-        await Promise.all([this.GET_DATA('cajas/'+this.user.caja.id)]).then((v)=>{
+        this.load=true
+        await Promise.all([this.GET_DATA('cajas/'+this.user.caja_id)]).then((v)=>{
           this.caja = v[0]
         })
+        this.load=false
       })
     },
   };

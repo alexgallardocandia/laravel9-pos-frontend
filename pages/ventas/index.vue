@@ -382,7 +382,7 @@ export default {
                     motivo: 'venta',
                     cliente: 'PUBLICO GENERAL',
                     carrito: this.carrito,
-                    caja_id: this.user.caja.id
+                    caja_id: this.user.caja_id
                 }
                 const res = await this.$api.$post('ventas', operacion)
                 console.log(res)

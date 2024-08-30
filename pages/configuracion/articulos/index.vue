@@ -39,6 +39,9 @@
                           <nuxtLink :to="url_editar+m.id" class="btn btn-info btn-sm py-1 px-2">
                             <i class="fas fa-pen"></i>
                           </nuxtLink>
+                          <nuxtLink :to="url_image+m.id" class="btn btn-success btn-sm py-1 px-2">
+                            <i class="fas fa-image"></i>
+                          </nuxtLink>
                           <button type="button" @click="Eliminar(m.id)" class="btn btn-danger btn-sm py-1 px-2">
                             <i class="fas fa-trash"></i>
                           </button>
