@@ -17,9 +17,10 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' },
       { rel: 'stylesheet', href: '/assets/css/nucleo-svg.css' },
       { rel: 'stylesheet', href: '/assets/css/soft-ui-dashboard.min.css?v=1.0.9' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'},
     ],
     script:[
-      {src:"https://kit.fontawesome.com/42d5adcbca.js"},
+      // {src:"https://kit.fontawesome.com/42d5adcbca.js"},
       {src:"/assets/js/core/popper.min.js"},
       {src:"/assets/js/core/bootstrap.min.js"},
       {src:"/assets/js/plugins/perfect-scrollbar.min.js"},
@@ -27,6 +28,7 @@ export default {
       {src:"/assets/js/plugins/dragula/dragula.min.js"},
       {src:"/assets/js/plugins/jkanban/jkanban.js"},
       {src:"/assets/js/plugins/chartjs.min.js"},
+      {src:"/assets/js/plugins/dropzone.min.js"},
     ]
   },
 

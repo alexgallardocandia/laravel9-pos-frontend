@@ -37,6 +37,11 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="d-flex mb-3">
+                                                <div class="form-check form-switch ms-auto">
+                                                    <input v-model="image" class="form-check-input" checked="" type="checkbox">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +52,8 @@
                                 <div class="row">
 
                                     <div class="col-3" v-for="m in articulosCategoria">
-                                        <PosArticuloVenta :articulo="m" @AddCarrito="AddCarrito"></PosArticuloVenta>
+                                        <PosArticuloVenta v-if="image" :articulo="m" @AddCarrito="AddCarrito"></PosArticuloVenta>
+                                        <PosArticuloVentaImage v-else :articulo="m" @AddCarrito="AddCarrito"></PosArticuloVentaImage>
                                     </div>
                                 </div>
                             </div>
@@ -260,11 +266,12 @@ export default {
         return {
             modulo: "Nueva venta",
             page: "Ventas",
-            user:{},
+            user: {},
             buscar: "",
             marca: "all",
             categoria: "all",
             load: true,
+            image: true,
             modalEdit: false,
             articulos: [],
             marcas: [],
@@ -418,7 +425,7 @@ export default {
     },
     mounted() {
         let user = localStorage.getItem('userAuth')
-        this.user= JSON.parse(user)
+        this.user = JSON.parse(user)
         this.$nextTick(async () => {
             try {
                 await this.Datos()

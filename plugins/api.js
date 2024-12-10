@@ -7,9 +7,10 @@ export default function ({ $axios }, inject) {
         }
       }
     })
-  
+    let url = 'http://localhost/curso-pos/laravel9-pos/public/api/'
+    api.url = url
     // Set baseURL to something different
-    api.setBaseURL('http://localhost/curso-pos/laravel9-pos/public/api/')
+    api.setBaseURL(url)
   
     // Inject to context as $api
     inject('api', api)

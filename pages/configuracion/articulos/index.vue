@@ -75,6 +75,7 @@ export default {
       modulo:'Articulos',
       url_nuevo:'/configuracion/articulos/nuevo',
       url_editar:'/configuracion/articulos/editar/',
+      url_image:'/configuracion/articulos/image/',
 
     }
   },
