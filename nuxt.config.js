@@ -40,6 +40,7 @@ export default {
   plugins: [
     '~/plugins/api',
     '~/plugins/printer',
+    '~/plugins/socket.io',
     // '~/node_modules/vue-js-modal/dist/vue-js-modal.esm.js' 
   ],
 

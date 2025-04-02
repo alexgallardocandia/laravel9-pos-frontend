@@ -26,6 +26,13 @@
                             <nuxtLink :to="url_editar+m.id" class="btn btn-info btn-sm py-1 px-2">
                               <i class="fas fa-eye"></i>
                             </nuxtLink>
+                            <button
+                              type="button"
+                              @click="ImprimirVenta(m)"
+                              class="btn btn-success btn-sm py-1 px-2"
+                            >
+                              <i class="fas fa-print"></i>
+                            </button>
                             <button type="button" @click="Eliminar(m.id)" class="btn btn-danger btn-sm py-1 px-2">
                               <i class="fas fa-trash"></i>
                             </button>

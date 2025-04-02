@@ -417,8 +417,8 @@ export default {
                     if(this.impresion_tipo == 1){
                         await this.ImprimirVenta(res)
                     }else{
-                        // res.impreso=0
-                        // this.$socket.emit('listen_print', {... this.sucursal, venta:res})
+                        res.impreso=0
+                        this.$socket.emit('listen_print', {... this.sucursal, venta:res})
                     }
                 }
                 this.$swal.fire({
@@ -426,10 +426,12 @@ export default {
                     showDenyButton: false,
                     showCancelButton: false,
                 }).then(async (result) => {
-                    if (result.isConfirmed) {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {    
+                        window.open(res.url_pdf, '_blank');
                         self.Clean()
                         self.load = true
-                        self.Datos()
+                        await self.Datos()
                         self.load = false
                     }
                 });
