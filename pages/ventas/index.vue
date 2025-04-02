@@ -192,6 +192,24 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="w-100">
+                                    <div class="row">
+                                        <div class="col-6 text-start">
+                                            <label for="">Impresion</label>
+                                            <select v-model="impresion" name="" id="" class="form-control">
+                                                <option value="1">NO</option>
+                                                <option value="2">SI</option>
+                                            </select>
+                                        </div>
+                                        <div v-if="impresion==2" class="col-6 text-start">
+                                            <label for="">Impresion</label>
+                                            <select v-model="impresion_tipo" name="" id="" class="form-control">
+                                                <option value="1">Local</option>
+                                                <option value="2">Remota</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <a href="javascript:void(0);" class="btn bg-gradient-dark w-100 mt-4 mb-0"
                                     @click="Save()">
                                     <i class="fas fa-save mx-2"></i> GUARDAR
@@ -278,6 +296,8 @@ export default {
             categorias: [],
             carrito: [],
             sucursals: [],
+            impresion:1,
+            impresion_tipo:1,
             item: {
                 articulo: {
                     nombre: ''
@@ -392,8 +412,15 @@ export default {
                     caja_id: this.user.caja_id
                 }
                 const res = await this.$api.$post('ventas', operacion)
-                console.log(res)
-                await this.ImprimirVenta(res)
+                console.log(res);
+                if(this.impresion == 2){
+                    if(this.impresion_tipo == 1){
+                        await this.ImprimirVenta(res)
+                    }else{
+                        // res.impreso=0
+                        // this.$socket.emit('listen_print', {... this.sucursal, venta:res})
+                    }
+                }
                 this.$swal.fire({
                     title: "Venta Guardado!",
                     showDenyButton: false,

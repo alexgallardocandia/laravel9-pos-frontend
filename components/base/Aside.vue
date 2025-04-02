@@ -200,6 +200,12 @@
                     <span class="sidenav-normal"> Mi Caja </span>
                   </nuxtLink>
                 </li>
+                <li class="nav-item ">
+                  <nuxtLink class="nav-link " to="/caja/historial">
+                    <span class="sidenav-mini-icon"> H </span>
+                    <span class="sidenav-normal"> Historial </span>
+                  </nuxtLink>
+                </li>
               </ul>
             </div>
           </li>
