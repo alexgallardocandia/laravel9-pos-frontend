@@ -565,9 +565,9 @@
       this.user = JSON.parse(user);
 
       console.log("User cargado:", this.user);
-      console.log("Caja ID:", this.user.caja.id); // Verificar que realmente existe
+      console.log("Caja ID:", this.user.caja_id); // Verificar que realmente existe
 
-      if (!this.user.caja.id) {
+      if (!this.user.caja_id) {
           console.error("Error: caja_id no está definido");
           return;
       }
@@ -575,7 +575,7 @@
       console.log(this.user.caja_id);
       this.$nextTick(async ()=>{
         this.load=true
-        await Promise.all([this.GET_DATA('cajas/'+this.user.caja.id)]).then((v)=>{
+        await Promise.all([this.GET_DATA('cajas/'+this.user.caja_id)]).then((v)=>{
           console.log(v)
           this.caja = v[0]
         })
