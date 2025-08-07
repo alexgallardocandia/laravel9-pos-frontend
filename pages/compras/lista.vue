@@ -20,7 +20,7 @@
                         <td class="py-0 px-1">{{ i+1 }}</td>
                         <td class="py-0 px-1">{{ m.fecha }}</td>
                         <td class="py-0 px-1">{{ m.proveedor }}</td>
-                        <td class="py-0 px-1">{{ m.total }}</td>
+                        <td class="py-0 px-1">{{ $formatNumber(m.total) }}</td>
                         <td class="py-0 px-1">
                           <div class="btn-group">
                             <nuxtLink :to="url_editar+m.id" class="btn btn-info btn-sm py-1 px-2">

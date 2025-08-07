@@ -97,7 +97,7 @@
                         <div class="card card-pricing">
                             <div class="card-header bg-gradient-dark text-center pt-4 pb-5 position-relative">
                                 <div class="z-index-1 position-relative">
-                                    <h1 class="text-white mt-2 mb-0"><small></small>{{ Number(totalCarrito).toFixed(2)
+                                    <h1 class="text-white mt-2 mb-0"><small></small>{{ $formatNumber(totalCarrito)
                                         }}</h1>
                                     <h6 class="text-white">Total</h6>
                                 </div>
@@ -173,7 +173,7 @@
                                                 </td>
                                                 <td class="text-start">
                                                     <p class="text-xxs font-weight-bold mb-0 text-start">
-                                                        {{ Number(m.cantidad * m.precio).toFixed(2) }}
+                                                        {{ $formatNumber(m.cantidad * m.precio) }}
                                                     </p>
                                                 </td>
                                                 <td>

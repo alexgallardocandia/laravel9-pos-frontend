@@ -39,15 +39,15 @@
                       <div class="d-flex justify-content-between">
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Precio Compra</h6>
-                          <h5>{{Number(model.compra).toFixed(2)}}</h5>
+                          <h5>{{$formatNumber(model.compra) }}</h5>
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Precio Venta</h6>
-                          <h5>{{Number(model.venta).toFixed(2)}}</h5>
+                          <h5>{{$formatNumber(model.venta) }}</h5>
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Ganancia Unitaria</h6>
-                          <h5>{{ Number(model.venta - model.compra).toFixed(2) }}</h5>
+                          <h5>{{ $formatNumber(model.venta - model.compra)  }}</h5>
                         </div>
                       </div>
                       <span class="badge " :class="[model.stock <= model.stock_minimo?'badge-danger':'badge-success']"
@@ -58,15 +58,15 @@
                       <div class="d-flex justify-content-between">
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Inversion</h6>
-                          <h5>{{ Number(model.inversion).toFixed(2)}}</h5>
+                          <h5>{{ $formatNumber(model.inversion) }}</h5>
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Valorizado</h6>
-                          <h5>{{ Number(model.valorizado).toFixed(2)}}</h5>
+                          <h5>{{ $formatNumber(model.valorizado) }}</h5>
                         </div>
                         <div class="mx-1">
                           <h6 class="mb-0 mt-3">Ganancia</h6>
-                          <h5>{{ Number(model.ganancia).toFixed(2)}}</h5>
+                          <h5>{{ $formatNumber(model.ganancia) }}</h5>
                         </div>
                       </div>
                       <div class="row mt-4">

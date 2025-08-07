@@ -31,9 +31,9 @@
                       <td class="py-0 px-1">{{ m.marca.nombre }}</td>
                       <td class="py-0 px-1">{{ m.categoria.nombre }}</td>
                       <td class="py-0 px-1"> <span class="badge " :class="[m.stock <= m.stock_minimo?'badge-danger':'badge-success']">{{ m.stock }} {{ m.medida.codigo }}</span></td>
-                      <td class="py-0 px-1">{{ Number(m.inversion).toFixed(2) }}</td>
-                      <td class="py-0 px-1">{{ Number(m.valorizado).toFixed(2)}}</td>
-                      <td class="py-0 px-1">{{ Number(m.ganancia).toFixed(2)}}</td>
+                      <td class="py-0 px-1">{{ $formatNumber(m.inversion) }}</td>
+                      <td class="py-0 px-1">{{ $formatNumber(m.valorizado)}}</td>
+                      <td class="py-0 px-1">{{ $formatNumber(m.ganancia)}}</td>
                       <td class="py-0 px-1">
                         <div class="btn-group">
                           <nuxtLink :to="url_editar+m.id" class="btn btn-info btn-sm py-1 px-2">

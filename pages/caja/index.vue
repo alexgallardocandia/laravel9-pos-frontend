@@ -82,7 +82,7 @@
                   class="card-header bg-gradient-dark text-center pt-4 pb-5 position-relative"
                 >
                   <div class="z-index-1 position-relative">
-                    <h1 class="text-white mt-2 mb-0"><small></small>{{caja.total}}</h1>
+                    <h1 class="text-white mt-2 mb-0"><small></small>{{$formatNumber(caja.total)}}</h1>
                     <h6 class="text-white">Total</h6>
                   </div>
                 </div>
@@ -198,7 +198,7 @@
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm">Ingresos</h6>
                           <span class="text-xs"
-                            >{{ caja.ingresos }}</span
+                            >{{ $formatNumber(caja.ingresos) }}</span
                           >
                         </div>
                       </div>
@@ -262,7 +262,7 @@
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm">Egresos</h6>
                           <span class="text-xs"
-                            >{{caja.egresos}}</span
+                            >{{$formatNumber(caja.egresos)}}</span
                           >
                         </div>
                       </div>
@@ -324,7 +324,7 @@
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm">Ventas</h6>
                           <span class="text-xs"
-                            >{{caja.total_ventas}}</span
+                            >{{$formatNumber(caja.total_ventas)}}</span
                           >
                         </div>
                       </div>
@@ -387,7 +387,7 @@
                         </div>
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm">Compras</h6>
-                          <span class="text-xs font-weight-bold">{{caja.total_compras}}</span>
+                          <span class="text-xs font-weight-bold">{{$formatNumber(caja.total_compras)}}</span>
                         </div>
                       </div>
                       <div class="d-flex">
@@ -555,11 +555,28 @@
       }
     },
     mounted() {
-      let user = localStorage.getItem('userAuth')
-      this.user= JSON.parse(user)
+      let user = localStorage.getItem('userAuth');
+
+      if (!user) {
+          console.error("No se encontró userAuth en localStorage");
+          return;
+      }
+
+      this.user = JSON.parse(user);
+
+      console.log("User cargado:", this.user);
+      console.log("Caja ID:", this.user.caja.id); // Verificar que realmente existe
+
+      if (!this.user.caja.id) {
+          console.error("Error: caja_id no está definido");
+          return;
+      }
+      // this.user= JSON.parse(user)
+      console.log(this.user.caja_id);
       this.$nextTick(async ()=>{
         this.load=true
-        await Promise.all([this.GET_DATA('cajas/'+this.user.caja_id)]).then((v)=>{
+        await Promise.all([this.GET_DATA('cajas/'+this.user.caja.id)]).then((v)=>{
+          console.log(v)
           this.caja = v[0]
         })
         this.load=false

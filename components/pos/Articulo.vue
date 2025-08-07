@@ -11,7 +11,7 @@
             </h6>
             <span class="text-xs">{{ articulo.nombre }}</span>
             <hr class="horizontal dark my-2" />
-            <h5 class="mb-0 text-sm">{{ Number(articulo.compra).toFixed(2) }}</h5>
+            <h5 class="mb-0 text-sm">{{ $formatNumber(articulo.compra) }}</h5>
         </div>
     </div>
 </template>

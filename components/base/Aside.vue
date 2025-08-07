@@ -307,6 +307,5 @@
             </div>
           </li>
         </ul>
-      </div>
     </aside>
 </template>
