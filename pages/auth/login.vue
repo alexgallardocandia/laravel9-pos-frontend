@@ -69,28 +69,23 @@ export default {
     methods: {
         async Login() {
             try {
-                const res = await this.$api.$post('login', this.model);
-                console.log(res)
-                let user = res
-                if(user.hasOwnProperty('errors')){
+                const res = await this.$api.$post('login', this.model)
+                console.log(res);
+                if(res.access_token) {
+                    localStorage.setItem('auth_token', res.access_token)
+                    localStorage.setItem('userAuth', JSON.stringify(res.user))
+                    this.$router.push('/')
+                } else {
                     this.$swal.fire({
                         title: "Credenciales incorrectas",
-                        showDenyButton: false,
-                        showCancelButton: false,
                         confirmButtonText: "Ok",
-                    });
-                } else {
-                    localStorage.setItem('userAuth', JSON.stringify(user))
-                   this.$router.push('/')
+                    })
                 }
             } catch (e) {
-                console.log(e)
                 this.$swal.fire({
-                    title: "No se pudo iniciar sesion",
-                    showDenyButton: false,
-                    showCancelButton: false,
-                    confirmButtonText: "Ok",
-                });
+                title: "No se pudo iniciar sesión",
+                confirmButtonText: "Ok",
+                })
             }
         }
     }
