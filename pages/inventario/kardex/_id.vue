@@ -238,8 +238,8 @@
                               <td>
                                 <h6><span class="badge text-xxs" :class="[m.tipo == 2?'badge-danger':'badge-success']">{{ m.cantidad }} {{ model.medida.codigo }}</span></h6>
                               </td>
-                              <td class="text-xxs">{{ Number(m.compra).toFixed(2) }}</td>
-                              <td class="align-middle text-sm text-xxs">{{ Number(m.venta).toFixed(2) }}</td>
+                              <td class="text-xxs">{{ $formatNumber(m.compra) }}</td>
+                              <td class="align-middle text-sm text-xxs">{{ $formatNumber(m.venta) }}</td>
                               <td class="align-middle text-center text-xxs">
                                 <a
                                   href="javascript:void(0);"

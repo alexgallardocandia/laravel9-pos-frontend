@@ -119,7 +119,7 @@
                  ></i>
                </a>
              </li>
-             <li class="nav-item dropdown pe-2 d-flex align-items-center">
+             <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
                <a
                  href="javascript:;"
                  class="nav-link text-body p-0"
@@ -248,7 +248,7 @@
                    </a>
                  </li>
                </ul>
-             </li>
+             </li> -->
            </ul>
          </div>
        </div>

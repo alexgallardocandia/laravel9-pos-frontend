@@ -428,7 +428,7 @@ export default {
                 }).then(async (result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {    
-                        window.open(res.url_pdf, '_blank');
+                        await self.AbrirPdfProtegido(res.url_pdf)
                         self.Clean()
                         self.load = true
                         await self.Datos()
@@ -450,6 +450,28 @@ export default {
             sucursal.venta = venta
             const res = await this.$printer.$post(sucursal.impresora_url + "venta", sucursal)
             console.log(res)
+        },
+        async AbrirPdfProtegido(urlPdf) {
+            try {
+                // Permite pasar url absoluta (comienza con http) o relativa (ruta desde la API)
+                let urlFinal = urlPdf
+                if (!/^https?:\/\//i.test(urlFinal)) {
+                    urlFinal = this.$api.defaults.baseURL + urlFinal
+                }
+                const response = await this.$api.get(urlFinal, { responseType: 'blob' })
+                const blob = new Blob([response.data], { type: 'application/pdf' })
+                const objectUrl = URL.createObjectURL(blob)
+                window.open(objectUrl, '_blank')
+                // Liberar URL después de un tiempo
+                setTimeout(() => URL.revokeObjectURL(objectUrl), 3000)
+            } catch (error) {
+                console.error('No se pudo abrir el PDF protegido:', error)
+                this.$swal.fire({
+                    title: 'No se pudo abrir el PDF',
+                    text: 'Verifique su sesión o permisos',
+                    icon: 'error'
+                })
+            }
         }
     },
     mounted() {

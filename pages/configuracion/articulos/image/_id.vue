@@ -1,6 +1,6 @@
 <template>
   <div>
-    <JcLoader :load="load"></JcLoader>
+    <Loader :load="load"></Loader>
     <AdminTemplate :page="page" :modulo="modulo">
       <div slot="body">
         <div class="row justify-content-center">
@@ -52,7 +52,6 @@ export default {
   data() {
     return {
       load: true,
-
       model: {
 
       },
@@ -111,15 +110,16 @@ export default {
       } catch (e) {
         console.log(e);
       } finally {
+        // Base URL de Axios inyectado por el plugin
+        console.log(this.$api.defaults && this.$api.defaults.baseURL);
         this.load = false;
-        let url = this.$api.url + 'articuloImages/articulo/' + this.$route.params.id
-
+        const url = this.$api.defaults.baseURL + this.apiUrl + "/" + self.$route.params.id
+        console.log(url);
+        console.log(localStorage.getItem('auth_token'));
         new Dropzone('div#fileDrop', {
           url: url,
           headers: {
-            'Authorization': '',
-            // remove Cache-Control and X-Requested-With
-            // to be sent along with the request
+            'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
             'Cache-Control': null,
             'X-Requested-With': null
           }
