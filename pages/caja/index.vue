@@ -202,13 +202,13 @@
                           >
                         </div>
                       </div>
-                      <div class="d-flex">
+                      <!-- <div class="d-flex">
                         <button
                           class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
                         >
                           <i class="ni ni-bold-right" aria-hidden="true"></i>
                         </button>
-                      </div>
+                      </div> -->
                     </li>
                     <li
                       class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg"
@@ -266,13 +266,13 @@
                           >
                         </div>
                       </div>
-                      <div class="d-flex">
+                      <!-- <div class="d-flex">
                         <button
                           class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
                         >
                           <i class="ni ni-bold-right" aria-hidden="true"></i>
                         </button>
-                      </div>
+                      </div> -->
                     </li>
                     <li
                       class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg"
@@ -328,13 +328,13 @@
                           >
                         </div>
                       </div>
-                      <div class="d-flex">
+                      <!-- <div class="d-flex">
                         <button
                           class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
                         >
                           <i class="ni ni-bold-right" aria-hidden="true"></i>
                         </button>
-                      </div>
+                      </div> -->
                     </li>
                     <li
                       class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg"
@@ -390,13 +390,7 @@
                           <span class="text-xs font-weight-bold">{{$formatNumber(caja.total_compras)}}</span>
                         </div>
                       </div>
-                      <div class="d-flex">
-                        <button
-                          class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
-                        >
-                          <i class="ni ni-bold-right" aria-hidden="true"></i>
-                        </button>
-                      </div>
+                     
                     </li>
                   </ul>
                   <a

@@ -6,8 +6,8 @@
 
       <div class="container-fluid py-4">
         <slot name="body" />
-        <BaseFooter/>
       </div>
+      <BaseFooter/>
     </main>
   </div>
 </template>

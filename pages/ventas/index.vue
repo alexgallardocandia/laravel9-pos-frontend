@@ -194,7 +194,7 @@
                                 </div>
                                 <div class="w-100">
                                     <div class="row">
-                                        <div class="col-6 text-start">
+                                        <div class="col-6 text-start" hidden>
                                             <label for="">Impresion</label>
                                             <select v-model="impresion" name="" id="" class="form-control">
                                                 <option value="1">NO</option>
@@ -398,6 +398,7 @@ export default {
             }
         },
         async Save() {
+            this.impresion = 1
             this.load = true
             let self = this
             try {
@@ -463,7 +464,7 @@ export default {
                 const objectUrl = URL.createObjectURL(blob)
                 window.open(objectUrl, '_blank')
                 // Liberar URL después de un tiempo
-                setTimeout(() => URL.revokeObjectURL(objectUrl), 3000)
+                setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
             } catch (error) {
                 console.error('No se pudo abrir el PDF protegido:', error)
                 this.$swal.fire({

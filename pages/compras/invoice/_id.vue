@@ -26,13 +26,13 @@
               <div class="card-body p-3 pt-0">
                 <hr class="horizontal dark mt-0 mb-4" />
                 <div class="row">
-                  <div class="col-12"  v-for="m in model.compra_inventario">
+                  <div class="col-12"  v-for="m in model.compraInventario">
                     <div class="d-flex">
   
                       <div>
                         <h6 class="text-lg mb-0 mt-2">{{ m.inventario.articulo.nombre }}</h6>
                         <p class="text-sm mb-3">
-                          {{Number(m.precio).toFixed(2)}} x {{m.cantidad}} {{m.inventario.articulo.medida.codigo}}
+                          {{$formatNumber(m.precio)}} x {{m.cantidad}} {{m.inventario.articulo.medida.codigo}}
                         </p>
                         <span class="badge badge-sm bg-gradient-success"
                           > <i class="fas fa-barcode"></i> {{m.inventario.articulo.barra}}</span
@@ -71,7 +71,7 @@
                     <div class="d-flex justify-content-between mt-4">
                       <span class="mb-2 text-lg"> Total: </span>
                       <span class="text-dark text-lg ms-2 font-weight-bold"
-                        >{{ Number(model.total).toFixed(2) }}</span
+                        >{{ $formatNumber(model.total) }}</span
                       >
                     </div>
                   </div>
@@ -99,7 +99,7 @@
   
         model: {
           total:0,
-          compra_inventario:[]
+          compraInventario:[]
         },
         apiUrl: "compras",
         page: "Compras",

@@ -9,7 +9,7 @@
               <i class="fas fa-plus"></i> Agregar
             </nuxtLink>
             <div class="col-lg-12">
-                <button
+                <!-- <button
                   class="btn bg-gradient-primary mb-0 mt-lg-auto w-100"
                   type="button"
                   name="button"
@@ -18,7 +18,7 @@
                 >
                   <i class="fas fa-cog"></i>
                   Ajustar Stock
-                </button>
+                </button> -->
                 
               </div>
           </div>

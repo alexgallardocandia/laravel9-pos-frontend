@@ -22,6 +22,15 @@
             <div class="card">
               <div class="card-header">
                 <h3>Actualizar</h3>
+                <div class="col-12">
+                <div class="row">
+                    <div class="col-10">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-info w-100" @click="$router.back()"> Regresar</button>
+                    </div>
+                </div>
+            </div>
               </div>
               <div class="card-body">
                 <ul class="list-group">

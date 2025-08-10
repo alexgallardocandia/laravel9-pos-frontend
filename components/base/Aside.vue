@@ -5,7 +5,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
           aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0"
-          href=" https://demos.creative-tim.com/soft-ui-dashboard-pro/pages/dashboards/default.html " target="_blank">
+          href="/">
           <span class="ms-1 font-weight-bold">PUNTO DE VENTA</span>
         </a>
       </div>
@@ -42,12 +42,12 @@
             </a>
             <div class="collapse " id="pagesExamples">
               <ul class="nav ms-4 ps-3">
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                   <nuxtLink class="nav-link " to="/configuracion/sucursal">
                     <span class="sidenav-mini-icon"> S </span>
                     <span class="sidenav-normal"> Sucursales </span>
                   </nuxtLink>
-                </li>
+                </li> -->
                 <li class="nav-item ">
                   <nuxtLink class="nav-link " to="/configuracion/marcas">
                     <span class="sidenav-mini-icon"> M </span>
