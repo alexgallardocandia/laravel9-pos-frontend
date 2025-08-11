@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Servicio de desarrollo
+  nuxt-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - PORT=3000
+    command: npm run dev
+    profiles:
+      - dev
+
+  # Servicio de producción
+  nuxt-prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3000
+    profiles:
+      - prod
+
+  # Servicio de build
+  nuxt-build:
+    build:
+      context: .
+      target: build
+    volumes:
+      - .:/app
+    command: npm run build
+    profiles:
+      - build
+
+networks:
+  default:
+    driver: bridge
