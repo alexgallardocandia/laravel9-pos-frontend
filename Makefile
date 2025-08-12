@@ -28,19 +28,19 @@ start: ## Inicia la aplicación en modo producción localmente
 
 # Comandos de Docker
 docker-build: ## Construye todas las imágenes de Docker
-	docker-compose -f $(COMPOSE_FILE) build
+	docker compose -f $(COMPOSE_FILE) build
 
 docker-dev: ## Inicia el entorno de desarrollo con Docker
-	docker-compose -f $(COMPOSE_FILE) --profile dev up -d
+	docker compose -f $(COMPOSE_FILE) --profile dev up -d
 
 docker-prod: ## Inicia el entorno de producción con Docker
-	docker-compose -f $(COMPOSE_FILE) --profile prod up -d
+	docker compose -f $(COMPOSE_FILE) --profile prod up -d
 
 docker-build-only: ## Solo construye la aplicación (sin iniciar servicios)
-	docker-compose -f $(COMPOSE_FILE) --profile build up --build
+	docker compose -f $(COMPOSE_FILE) --profile build up --build
 
 docker-stop: ## Detiene todos los servicios de Docker
-	docker-compose -f $(COMPOSE_FILE) down
+	docker compose -f $(COMPOSE_FILE) down
 
 docker-restart: ## Reinicia los servicios de Docker
 	$(MAKE) docker-stop
@@ -48,20 +48,20 @@ docker-restart: ## Reinicia los servicios de Docker
 
 # Comandos de utilidad
 logs: ## Muestra los logs del servicio
-	docker-compose -f $(COMPOSE_FILE) logs -f $(SERVICE_NAME)
+	docker compose -f $(COMPOSE_FILE) logs -f $(SERVICE_NAME)
 
 logs-prod: ## Muestra los logs del servicio de producción
-	docker-compose -f $(COMPOSE_FILE) logs -f $(PROD_SERVICE)
+	docker compose -f $(COMPOSE_FILE) logs -f $(PROD_SERVICE)
 
 shell: ## Abre una shell en el contenedor de desarrollo
-	docker-compose -f $(COMPOSE_FILE) exec $(SERVICE_NAME) sh
+	docker compose -f $(COMPOSE_FILE) exec $(SERVICE_NAME) sh
 
 shell-prod: ## Abre una shell en el contenedor de producción
-	docker-compose -f $(COMPOSE_FILE) exec $(PROD_SERVICE) sh
+	docker compose -f $(COMPOSE_FILE) exec $(PROD_SERVICE) sh
 
 # Comandos de limpieza
 clean: ## Limpia archivos temporales y contenedores
-	docker-compose -f $(COMPOSE_FILE) down -v
+	docker compose -f $(COMPOSE_FILE) down -v
 	docker system prune -f
 	docker volume prune -f
 
@@ -80,7 +80,7 @@ quick-prod: ## Inicio rápido del entorno de producción
 
 # Comandos de monitoreo
 status: ## Muestra el estado de los servicios
-	docker-compose -f $(COMPOSE_FILE) ps
+	docker compose -f $(COMPOSE_FILE) ps
 
 top: ## Muestra el uso de recursos de los contenedores
 	docker stats

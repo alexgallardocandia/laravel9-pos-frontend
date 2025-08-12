@@ -7,7 +7,7 @@ export default function ({ $axios }, inject) {
     },
   })
 
-  const url = 'http://localhost/curso-pos/laravel9-pos/public/api/'
+  const url = 'http://localhost:8000/api/'
   api.setBaseURL(url)
 
   // Agregar interceptor para agregar token en cada petición

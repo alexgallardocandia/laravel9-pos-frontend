@@ -60,7 +60,7 @@ check_docker() {
         exit 1
     fi
     
-    if ! command -v docker-compose &> /dev/null; then
+    if ! command -v docker compose &> /dev/null; then
         print_error "Docker Compose no está instalado. Por favor instala Docker Compose."
         exit 1
     fi
@@ -74,28 +74,28 @@ check_docker() {
 # Función para desarrollo
 start_dev() {
     print_message "Iniciando entorno de desarrollo..."
-    docker-compose --profile dev up -d
+    docker compose --profile dev up -d
     print_message "Entorno de desarrollo iniciado en http://localhost:3000"
 }
 
 # Función para producción
 start_prod() {
     print_message "Iniciando entorno de producción..."
-    docker-compose --profile prod up -d
+    docker compose --profile prod up -d
     print_message "Entorno de producción iniciado en http://localhost:3000"
 }
 
 # Función para construir
 build_app() {
     print_message "Construyendo aplicación..."
-    docker-compose --profile build up --build
+    docker compose --profile build up --build
     print_message "Aplicación construida exitosamente"
 }
 
 # Función para detener
 stop_services() {
     print_message "Deteniendo servicios..."
-    docker-compose down
+    docker compose down
     print_message "Servicios detenidos"
 }
 
@@ -109,31 +109,31 @@ restart_services() {
 # Función para logs
 show_logs() {
     print_message "Mostrando logs de desarrollo..."
-    docker-compose logs -f nuxt-dev
+    docker compose logs -f nuxt-dev
 }
 
 # Función para logs de producción
 show_logs_prod() {
     print_message "Mostrando logs de producción..."
-    docker-compose logs -f nuxt-prod
+    docker compose logs -f nuxt-prod
 }
 
 # Función para shell
 open_shell() {
     print_message "Abriendo shell en contenedor de desarrollo..."
-    docker-compose exec nuxt-dev sh
+    docker compose exec nuxt-dev sh
 }
 
 # Función para shell de producción
 open_shell_prod() {
     print_message "Abriendo shell en contenedor de producción..."
-    docker-compose exec nuxt-prod sh
+    docker compose exec nuxt-prod sh
 }
 
 # Función para estado
 show_status() {
     print_message "Mostrando estado de servicios..."
-    docker-compose ps
+    docker compose ps
 }
 
 # Función para limpiar
@@ -142,7 +142,7 @@ clean_up() {
     read -r response
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
         print_message "Limpiando contenedores y volúmenes..."
-        docker-compose down -v
+        docker compose down -v
         docker system prune -f
         docker volume prune -f
         print_message "Limpieza completada"
